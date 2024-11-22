@@ -16,12 +16,12 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.use(express.static("public"))
 
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    credentials: true,
-};
+// const corsOptions = {
+//     origin: 'http://localhost:3000',
+//     credentials: true,
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 //routes import
 import student from './routes/student.route.js'
