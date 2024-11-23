@@ -5,10 +5,10 @@ import cookieParser from "cookie-parser"
 const app = express()
 app.use(cookieParser())
 
-app.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true
-}))
+// app.use(cors({
+//     origin: process.env.CORS_ORIGIN,
+//     credentials: true
+// }))
 
 // app.use(cors());
 
@@ -20,6 +20,24 @@ app.use(express.static("public"))
 //     origin: 'http://localhost:3000',
 //     credentials: true,
 // };
+// const cors = require('cors');
+
+// Dynamically set allowed origins
+const allowedOrigins = [
+  'https://frontendmern-jnyu.onrender.com', // Your deployed frontend
+  'http://localhost:3000' // Optional: for local development
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true, // If your frontend and backend share cookies or auth headers
+}));
 
 // app.use(cors(corsOptions));
 
